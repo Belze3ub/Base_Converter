@@ -1,90 +1,169 @@
 import { useState } from 'react';
 import Button from './Button';
 
+interface Bases {
+  [key: string]: string;
+  binary: string;
+  decimal: string;
+  octal: string;
+  hexadecimal: string;
+}
+
 const Input = () => {
-  const [binary, setBinary] = useState('');
-  const [decimal, setDecimal] = useState('');
-  const [octal, setOctal] = useState('');
-  const [hexadecimal, setHexadecimal] = useState('');
+  // const [binary, setBinary] = useState('');
+  // const [decimal, setDecimal] = useState('');
+  // const [octal, setOctal] = useState('');
+  // const [hexadecimal, setHexadecimal] = useState('');
+  const [bases, setBases] = useState<Bases>({
+    binary: '',
+    decimal: '',
+    octal: '',
+    hexadecimal: '',
+  });
   const [from, setFrom] = useState('binary');
   const [to, setTo] = useState('decimal');
-  const systems = ['binary', 'decimal', 'octal', 'hexadecimal'];
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const validBinary = /[01]+$/;
-    if (
-      from === 'binary' &&
-      (e.target.value === '' || validBinary.test(e.target.value))
-    ) {
-      setBinary(e.target.value);
-    }
-    const validDecimal = /[0-9]+$/;
-    if (
-      from === 'decimal' &&
-      (e.target.value === '' || validDecimal.test(e.target.value))
-    ) {
-      setDecimal(e.target.value);
-    }
-    const validOctal = /[0-8]+$/;
-    if (
-      from === 'octal' &&
-      (e.target.value === '' || validOctal.test(e.target.value))
-    ) {
-      setOctal(e.target.value);
-    }
-    const validHexadecimal = /[0-9a-fA-F]+$/;
-    if (
-      from === 'hexadecimal' &&
-      (e.target.value === '' || validHexadecimal.test(e.target.value))
-    ) {
-      setHexadecimal(e.target.value);
-    }
+  const validInputs = ['binary', 'decimal', 'octal', 'hexadecimal'];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, from: string) => {
+    const validRegex: {[key: string]: RegExp} = {
+      binary: /[01]+$/,
+      decimal: /[0-9]+$/,
+      octal: /[0-7]+$/,
+      hexadecimal: /[0-9a-fA-F]+$/,
+    };
+
+    validInputs.forEach(input => {
+      if(input === from && (e.target.value === '' || validRegex[input].test(e.target.value))) {
+        // eval(`set${from[0].toUpperCase() + from.slice(1)}(e.target.value)`);
+        setBases((prevBases) => ({...prevBases, [from]: e.target.value}))
+      }
+    })
+    // const readInput = (from: string, regex: RegExp) => {
+    //   if (
+    //     (from === 'binary' || from === 'decimal' || from === 'octal' || from === 'hexadecimal') &&
+    //     (e.target.value === '' || regex.test(e.target.value))
+    //   ) {
+    //     eval(`set${from[0].toUpperCase() + from.slice(1)}(e.target.value)`);
+    //   }
+    // };
+    // const validBinary = /[01]+$/;
+    // const validDecimal = /[0-9]+$/;
+    // const validOctal = /[0-8]+$/;
+    // const validHexadecimal = /[0-9a-fA-F]+$/;
+
+    // readInput(from, validBinary);
+    // readInput(from, validDecimal);
+    // readInput(from, validOctal);
+    // readInput(from, validHexadecimal);
+    // if (
+    //   from === 'binary' &&
+    //   (e.target.value === '' || validBinary.test(e.target.value))
+    // ) {
+    //   setBinary(e.target.value);
+    // }
+    // if (
+    //   from === 'decimal' &&
+    //   (e.target.value === '' || validDecimal.test(e.target.value))
+    // ) {
+    //   setDecimal(e.target.value);
+    // }
+    // if (
+    //   from === 'octal' &&
+    //   (e.target.value === '' || validOctal.test(e.target.value))
+    // ) {
+    //   setOctal(e.target.value);
+    // }
+    // if (
+    //   from === 'hexadecimal' &&
+    //   (e.target.value === '' || validHexadecimal.test(e.target.value))
+    // ) {
+    //   setHexadecimal(e.target.value);
+    // }
   };
+
+  // const convert = (from: string, to: string, value: string) => {
+  //   if (!from) return '';
+  //   if (from === 'binary') {
+  //     if (to === 'decimal') {
+  //       setDecimal(parseInt(value, 2).toString(10));
+  //     }
+  //     if (to === 'octal') {
+  //       setOctal(parseInt(value, 2).toString(8));
+  //     }
+  //     if (to === 'hexadecimal') {
+  //       setHexadecimal(parseInt(value, 2).toString(16).toUpperCase());
+  //     }
+  //   }
+  //   if (from === 'decimal') {
+  //     if (to === 'binary') {
+  //       setBinary(parseInt(value, 10).toString(2));
+  //     }
+  //     if (to === 'octal') {
+  //       setOctal(parseInt(value, 10).toString(8));
+  //     }
+  //     if (to === 'hexadecimal') {
+  //       setHexadecimal(parseInt(value, 10).toString(16).toUpperCase());
+  //     }
+  //   }
+  //   if (from === 'octal') {
+  //     if (to === 'binary') {
+  //       setBinary(parseInt(value, 8).toString(2));
+  //     }
+  //     if (to === 'decimal') {
+  //       setDecimal(parseInt(value, 8).toString(10));
+  //     }
+  //     if (to === 'hexadecimal') {
+  //       setHexadecimal(parseInt(value, 8).toString(16).toUpperCase());
+  //     }
+  //   }
+  //   if (from === 'hexadecimal') {
+  //     if (to === 'binary') {
+  //       setBinary(parseInt(value, 16).toString(2));
+  //     }
+  //     if (to === 'octal') {
+  //       setOctal(parseInt(value, 16).toString(8));
+  //     }
+  //     if (to === 'decimal') {
+  //       setDecimal(parseInt(value, 16).toString(10).toUpperCase());
+  //     }
+  //   }
+  // };
 
   const convert = (from: string, to: string, value: string) => {
     if (!from) return '';
-    if (from === 'binary') {
-      if (to === 'decimal') {
-        setDecimal(parseInt(value, 2).toString(10));
-      }
-      if (to === 'octal') {
-        setOctal(parseInt(value, 2).toString(8));
-      }
-      if (to === 'hexadecimal') {
-        setHexadecimal(parseInt(value, 2).toString(16));
-      }
-    }
-    if (from === 'decimal') {
-      if (to === 'binary') {
-        setBinary(parseInt(value, 10).toString(2));
-      }
-      if (to === 'octal') {
-        setOctal(parseInt(value, 10).toString(8));
-      }
-      if (to === 'hexadecimal') {
-        setHexadecimal(parseInt(value, 10).toString(16));
-      }
-    }
-    if (from === 'octal') {
-      if (to === 'binary') {
-        setBinary(parseInt(value, 8).toString(2));
-      }
-      if (to === 'decimal') {
-        setDecimal(parseInt(value, 8).toString(10));
-      }
-      if (to === 'hexadecimal') {
-        setHexadecimal(parseInt(value, 8).toString(16));
-      }
-    }
-    if (from === 'hexadecimal') {
-      if (to === 'binary') {
-        setBinary(parseInt(value, 16).toString(2));
-      }
-      if (to === 'octal') {
-        setOctal(parseInt(value, 16).toString(8));
-      }
-      if (to === 'decimal') {
-        setDecimal(parseInt(value, 16).toString(10));
-      }
+
+    type Conversions = {
+      [key: string]: { [key: string]: string };
+    };
+
+    const conversions: Conversions = {
+      binary: {
+        decimal: parseInt(value, 2).toString(10),
+        octal: parseInt(value, 2).toString(8),
+        hexadecimal: parseInt(value, 2).toString(16),
+      },
+      decimal: {
+        binary: parseInt(value, 10).toString(2),
+        octal: parseInt(value, 10).toString(8),
+        hexadecimal: parseInt(value, 10).toString(16),
+      },
+      octal: {
+        binary: parseInt(value, 8).toString(2),
+        decimal: parseInt(value, 8).toString(10),
+        hexadecimal: parseInt(value, 8).toString(16),
+      },
+      hexadecimal: {
+        binary: parseInt(value, 16).toString(2),
+        octal: parseInt(value, 16).toString(8),
+        decimal: parseInt(value, 16).toString(10),
+      },
+    };
+
+    if (conversions[from] && conversions[from][to]) {
+      setBases((prevValues) => ({
+        ...prevValues,
+        [to]: conversions[from][to],
+      }));
     }
   };
 
@@ -93,30 +172,45 @@ const Input = () => {
     if (valueFrom) convert(from, to, valueFrom);
   };
 
-  const value = (from: string): string | undefined => {
-    if (from === 'binary') return binary;
-    if (from === 'octal') return octal;
-    if (from === 'decimal') return decimal;
-    if (from === 'hexadecimal') return hexadecimal;
-    return undefined;
-  };
+  // const value = (from: string): string | undefined => {
+  //   if (from === 'binary') return binary;
+  //   if (from === 'octal') return octal;
+  //   if (from === 'decimal') return decimal;
+  //   if (from === 'hexadecimal') return hexadecimal;
+  //   return undefined;
+  // };
 
-  const valueTo = (to: string): string | undefined => {
-    if (to === 'binary') return binary;
-    if (to === 'octal') return octal;
-    if (to === 'decimal') return decimal;
-    if (to === 'hexadecimal') return hexadecimal;
-    return undefined;
-  };
-  const valueToo = valueTo(to);
+  const value = (from: string) => bases[from];
+
+  // const valueTo = (to: string): string | undefined => {
+  //   if (to === 'binary') return binary;
+  //   if (to === 'octal') return octal;
+  //   if (to === 'decimal') return decimal;
+  //   if (to === 'hexadecimal') return hexadecimal;
+  //   return undefined;
+  // };
+
+  const valueTo = value(to)
   const valueFrom = value(from);
+  
+  // const valueToo = valueTo(to);
+  // const valueFrom = value(from);
+
+  // const resetInputs = () => {
+  //   setBinary('');
+  //   setDecimal('');
+  //   setOctal('');
+  //   setHexadecimal('');
+  // };
 
   const resetInputs = () => {
-    setBinary('');
-    setDecimal('');
-    setOctal('');
-    setHexadecimal('');
-  };
+    setBases({
+      binary: '',
+      decimal: '',
+      octal: '',
+      hexadecimal: '',
+    });
+  }
 
   return (
     <div className="convert">
@@ -127,11 +221,11 @@ const Input = () => {
             name=""
             id="from"
             value={from}
-            onChange={(e) => setFrom(e.target.value)}
+            onChange={(e) => {setFrom(e.target.value); resetInputs()}}
           >
-            {systems.map((system) => (
-              <option key={system} value={system}>
-                {system[0].toUpperCase() + system.slice(1)}
+            {validInputs.map((input) => (
+              <option key={input} value={input}>
+                {input[0].toUpperCase() + input.slice(1)}
               </option>
             ))}
           </select>
@@ -140,11 +234,11 @@ const Input = () => {
             name=""
             id="to"
             value={to}
-            onChange={(e) => setTo(e.target.value)}
+            onChange={(e) => {setTo(e.target.value); resetInputs()}}
           >
-            {systems.map((system) => (
-              <option key={system} value={system}>
-                {system[0].toUpperCase() + system.slice(1)}
+            {validInputs.map((input) => (
+              <option key={input} value={input}>
+                {input[0].toUpperCase() + input.slice(1)}
               </option>
             ))}
           </select>
@@ -154,7 +248,7 @@ const Input = () => {
           type="text"
           id="binary"
           value={valueFrom}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e, from)}
         />
         <div>
           <Button className="btn" color="green" children="Convert" />
@@ -168,7 +262,7 @@ const Input = () => {
       </form>
       <div className="flex">
         <label htmlFor="decimal">Decimal number</label>
-        <input name="" id="decimal" readOnly value={valueToo}></input>
+        <input name="" id="decimal" readOnly value={valueTo}></input>
       </div>
     </div>
   );
