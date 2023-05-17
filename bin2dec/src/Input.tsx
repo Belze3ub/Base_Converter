@@ -3,10 +3,6 @@ import Button from './Button';
 
 interface Bases {
   [key: string]: string;
-  binary: string;
-  decimal: string;
-  octal: string;
-  hexadecimal: string;
 }
 
 const Input = () => {
@@ -24,20 +20,24 @@ const Input = () => {
   const [to, setTo] = useState('decimal');
   const validInputs = ['binary', 'decimal', 'octal', 'hexadecimal'];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, from: string) => {
-    const validRegex: {[key: string]: RegExp} = {
-      binary: /[01]+$/,
-      decimal: /[0-9]+$/,
-      octal: /[0-7]+$/,
-      hexadecimal: /[0-9a-fA-F]+$/,
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    from: string
+  ) => {
+    const validRegex: { [key: string]: RegExp } = {
+      binary: /^[01]+$/,
+      decimal: /^[0-9]+$/,
+      octal: /^[0-7]+$/,
+      hexadecimal: /^0-9a-fA-F]+$/,
     };
 
     validInputs.forEach(input => {
       if(input === from && (e.target.value === '' || validRegex[input].test(e.target.value))) {
         // eval(`set${from[0].toUpperCase() + from.slice(1)}(e.target.value)`);
-        setBases((prevBases) => ({...prevBases, [from]: e.target.value}))
+        setBases((prevBases) => ({ ...prevBases, [from]: e.target.value }));
       }
     })
+
     // const readInput = (from: string, regex: RegExp) => {
     //   if (
     //     (from === 'binary' || from === 'decimal' || from === 'octal' || from === 'hexadecimal') &&
@@ -190,9 +190,9 @@ const Input = () => {
   //   return undefined;
   // };
 
-  const valueTo = value(to)
+  const valueTo = value(to);
   const valueFrom = value(from);
-  
+
   // const valueToo = valueTo(to);
   // const valueFrom = value(from);
 
@@ -210,7 +210,7 @@ const Input = () => {
       octal: '',
       hexadecimal: '',
     });
-  }
+  };
 
   return (
     <div className="convert">
@@ -221,7 +221,10 @@ const Input = () => {
             name=""
             id="from"
             value={from}
-            onChange={(e) => {setFrom(e.target.value); resetInputs()}}
+            onChange={(e) => {
+              setFrom(e.target.value);
+              resetInputs();
+            }}
           >
             {validInputs.map((input) => (
               <option key={input} value={input}>
@@ -234,7 +237,10 @@ const Input = () => {
             name=""
             id="to"
             value={to}
-            onChange={(e) => {setTo(e.target.value); resetInputs()}}
+            onChange={(e) => {
+              setTo(e.target.value);
+              resetInputs();
+            }}
           >
             {validInputs.map((input) => (
               <option key={input} value={input}>
