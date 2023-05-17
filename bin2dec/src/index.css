@@ -1,0 +1,47 @@
+body {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+}
+
+.convert {
+  background-color: rgb(102, 187, 236);
+  padding: 2rem;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1rem;
+}
+
+input {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: none;
+}
+
+input:focus {
+  outline: 2px solid blue;
+}
+
+input:focus:read-only {
+  outline: none;
+}
+
+.btn {
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1.2rem;
+}
