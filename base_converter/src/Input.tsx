@@ -33,7 +33,6 @@ const Input = () => {
         (e.target.value === '' || validRegex[from].test(e.target.value))
       ) {
         setBases((prevBases) => ({ ...prevBases, [from]: e.target.value }));
-        console.log(validRegex[from].test(e.target.value));
       }
     })
   };
