@@ -1,17 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
   display: grid;
   min-height: 100vh;
   place-items: center;
+  background-color: #40667d;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
 }
 
 .convert {
-  background-color: rgb(102, 187, 236);
+  background-color: #3e607b;
   padding: 2rem;
-  min-height: 15rem;
+  min-height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1rem;
+  box-shadow: 0 0 15px black;
+  min-width: 16rem;
+}
+
+.systems {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.from, .to {
+  text-align: center;
+}
+
+select {
+  border-radius: 100vw;
+  padding: .3rem .6rem;
+  text-align-last: center;
+  display: block;
+  border: none;
 }
 
 input {
@@ -21,12 +47,21 @@ input {
   border: none;
 }
 
-input:focus {
-  outline: 2px solid blue;
+input, select {
+  background-color: #77a1bb;
+}
+
+input:focus, .btn:focus, select:focus {
+  outline: 2px solid #083857;
 }
 
 input:focus:read-only {
   outline: none;
+}
+
+.btn-container {
+  display: flex;
+  gap: .5rem;
 }
 
 .btn {
@@ -35,6 +70,15 @@ input:focus:read-only {
   color: white;
   border: none;
   cursor: pointer;
+  flex: 1;
+}
+
+.btn.conv {
+  background-color: #083857;
+}
+
+.btn.clear {
+  background-color: #919699;
 }
 
 .flex {
