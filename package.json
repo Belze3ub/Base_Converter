@@ -1,5 +1,5 @@
 {
-  "name": "bin2dec",
+  "name": "base_converter",
   "private": true,
   "version": "0.0.0",
   "type": "module",
