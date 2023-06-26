@@ -9,24 +9,25 @@ body {
   font-family: 'Poppins', sans-serif;
   color: white;
   margin: 0;
+  padding: 0 .5rem;
 }
 
 .convert {
   background-color: #3e607b;
-  padding: 2rem;
+  padding: 1rem;
   min-height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1rem;
   box-shadow: 0 0 15px black;
-  min-width: 16rem;
 }
 
 .systems {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
+  gap: .5rem;
 }
 
 .from, .to {
