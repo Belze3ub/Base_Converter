@@ -6,7 +6,7 @@ System Base Converter is a web application developed in React that allows users 
 
 ## Table of Contents
 
-- [Links](#Links)
+- [Link](#Link)
 - [Built with](#built-with)
 - [App preview](#app-preview) 
 
