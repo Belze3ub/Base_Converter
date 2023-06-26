@@ -23,5 +23,5 @@ System Base Converter is a web application developed in React that allows users 
 
 ### App preview
 
-(screenshots\preview.png)
-(screenshots\binToDec.png)
+![App Preview](screenshots/preview.png)
+![How it works](screenshots/binToDec.png)
