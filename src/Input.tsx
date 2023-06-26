@@ -134,14 +134,14 @@ const Input = () => {
             </select>
           </div>
         </div>
-        <label htmlFor="binary">From Base</label>
+        <label htmlFor="binary">{from[0].toUpperCase() + from.slice(1)}</label>
         <input
           type="text"
           id="binary"
           value={valueFrom}
           onChange={(e) => handleChange(e, from)}
         />
-        <div className='btn-container'>
+        <div className="btn-container">
           <Button className="btn conv" children="Convert" />
           <Button
             className="btn clear"
@@ -151,7 +151,7 @@ const Input = () => {
         </div>
       </form>
       <div className="flex">
-        <label htmlFor="decimal">To Base</label>
+        <label htmlFor="decimal">{to[0].toUpperCase() + to.slice(1)}</label>
         <input name="" id="decimal" readOnly value={valueTo}></input>
       </div>
     </div>
